@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Free Website</title>
+    <style>
+        /* Modern Clean Style */
+        :root {
+            --primary: #4361ee;
+            --dark: #212529;
+            --light: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--dark);
+            color: white;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Welcome to My Site</h1>
+        <p>Created for free with GitHub Pages</p>
+        <a href="#contact" class="btn">Contact Me</a>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h2>About This Website</h2>
+        <p>This is a completely free website hosted on GitHub Pages. You can customize everything!</p>
+        
+        <h3>Features:</h3>
+        <ul>
+            <li>100% Free Forever</li>
+            <li>No Ads</li>
+            <li>Mobile-Friendly</li>
+            <li>Easy to Update</li>
+        </ul>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact" class="container">
+        <h2>Contact Form (Free with Formspree)</h2>
+        <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+            <label>Your Email: <input type="email" name="_replyto" required></label>
+            <label>Message: <textarea name="message" required></textarea></label>
+            <button type="submit" class="btn">Send</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 My Free Website | Made with ❤️
+    </footer>
+</body>
+</html>
