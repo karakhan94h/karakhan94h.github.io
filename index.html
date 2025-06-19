@@ -145,27 +145,112 @@
         /* Skills Grid */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin: 3rem 0;
         }
 
         .skill-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            background: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            perspective: 1000px;
+            height: 320px;
+            width: 100%;
+            text-align: left;
+            position: relative;
         }
 
-        .skill-card:hover {
-            transform: translateY(-5px);
+        .skill-front,
+        .skill-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            transition: transform 0.6s;
+            padding: 2rem;
+            border-radius: 16px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .skill-front {
+            transform: rotateY(0deg);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .skill-back {
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .skill-card.flipped .skill-front {
+            transform: rotateY(180deg);
+        }
+
+        .skill-card.flipped .skill-back {
+            transform: rotateY(360deg);
         }
 
         .skill-icon {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            display: inline-block;
+            display: block;
+        }
+
+        .expand-icon {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            color: var(--gray);
+            opacity: 0.5;
+        }
+
+        .skill-back h4 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .skill-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.5rem 0;
+        }
+
+        .skill-list li {
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .skill-list li:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .skill-card {
+                height: 340px;
+            }
         }
 
         /* Projects Grid */
@@ -438,27 +523,89 @@
                 <p>I'm a passionate creator dedicated to building beautiful and functional digital experiences. With a keen eye for design and attention to detail, I bring ideas to life through clean, modern, and user-friendly interfaces.</p>
                 
                 <div class="skills-grid">
-                    <div class="skill-card">
-                        <span class="skill-icon">🎨</span>
-                        <h3>Design</h3>
-                        <p>Creating beautiful, intuitive interfaces that users love to interact with.</p>
-                    </div>
-                    <div class="skill-card">
-                        <span class="skill-icon">💻</span>
-                        <h3>Development</h3>
-                        <p>Building responsive, performant websites using modern technologies.</p>
-                    </div>
-                    <div class="skill-card">
-                        <span class="skill-icon">📱</span>
-                        <h3>Mobile-First</h3>
-                        <p>Ensuring great experiences across all devices and screen sizes.</p>
-                    </div>
-                    <div class="skill-card">
-                        <span class="skill-icon">🚀</span>
-                        <h3>Optimization</h3>
-                        <p>Maximizing performance and user experience through best practices.</p>
-                    </div>
+                    <button class="skill-card" onclick="toggleSkillInfo(this, 'design')">
+                        <div class="skill-front">
+                            <span class="skill-icon">🎨</span>
+                            <h3>Design</h3>
+                            <p>Creating beautiful, intuitive interfaces that users love to interact with.</p>
+                            <span class="expand-icon">+</span>
+                        </div>
+                        <div class="skill-back">
+                            <h4>Design Skills</h4>
+                            <ul class="skill-list">
+                                <li>UI/UX Design</li>
+                                <li>Wireframing</li>
+                                <li>Prototyping</li>
+                                <li>Adobe Creative Suite</li>
+                                <li>Figma</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-sm">Hire Me</a>
+                        </div>
+                    </button>
+                    <button class="skill-card" onclick="toggleSkillInfo(this, 'development')">
+                        <div class="skill-front">
+                            <span class="skill-icon">💻</span>
+                            <h3>Development</h3>
+                            <p>Building responsive, performant websites using modern technologies.</p>
+                            <span class="expand-icon">+</span>
+                        </div>
+                        <div class="skill-back">
+                            <h4>Tech Stack</h4>
+                            <ul class="skill-list">
+                                <li>React & Next.js</li>
+                                <li>Node.js & Express</li>
+                                <li>MongoDB & PostgreSQL</li>
+                                <li>AWS & Docker</li>
+                                <li>Git & CI/CD</li>
+                            </ul>
+                            <a href="#projects" class="btn btn-sm">View Projects</a>
+                        </div>
+                    </button>
+                    <button class="skill-card" onclick="toggleSkillInfo(this, 'mobile')">
+                        <div class="skill-front">
+                            <span class="skill-icon">📱</span>
+                            <h3>Mobile-First</h3>
+                            <p>Ensuring great experiences across all devices and screen sizes.</p>
+                            <span class="expand-icon">+</span>
+                        </div>
+                        <div class="skill-back">
+                            <h4>Mobile Expertise</h4>
+                            <ul class="skill-list">
+                                <li>Responsive Design</li>
+                                <li>Progressive Web Apps</li>
+                                <li>Cross-platform Testing</li>
+                                <li>Performance Optimization</li>
+                                <li>Mobile UX Patterns</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-sm">Discuss Project</a>
+                        </div>
+                    </button>
+                    <button class="skill-card" onclick="toggleSkillInfo(this, 'optimization')">
+                        <div class="skill-front">
+                            <span class="skill-icon">🚀</span>
+                            <h3>Optimization</h3>
+                            <p>Maximizing performance and user experience through best practices.</p>
+                            <span class="expand-icon">+</span>
+                        </div>
+                        <div class="skill-back">
+                            <h4>Optimization Tools</h4>
+                            <ul class="skill-list">
+                                <li>Lighthouse Audits</li>
+                                <li>Core Web Vitals</li>
+                                <li>SEO Best Practices</li>
+                                <li>Cache Strategies</li>
+                                <li>Load Time Analysis</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-sm">Optimize Site</a>
+                        </div>
+                    </button>
                 </div>
+                
+                <script>
+                    function toggleSkillInfo(card, skillType) {
+                        card.classList.toggle('flipped');
+                    }
+                </script>
             </section>
         </div>
 
